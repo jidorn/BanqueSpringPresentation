@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<f:metadata>
+	<f:event listener="#{connectionManagedBean.securePage}" type="preRenderView"></f:event>
+</f:metadata>
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+	<h:form>
+		Bienvenue Utilisateur connecté !!
+		<br />
+		comptes : n° 
+		<h:selectOneMenu 
+		value="#{utilisateurManagedBean.compteSelect.numero}">
+		<f:ajax listener="#{utilisateurManagedBean.listerOperation()}"
+		 	    render="tutu"></f:ajax>
+			<f:selectItems value="#{utilisateurManagedBean.comptes}"
+						   var="cpt" itemLabel="#{cpt.numero}"
+						   			 itemValue="#{cpt.numero}" />
+		</h:selectOneMenu>
+		<h:dataTable id="tutu" border="1" value="#{utilisateurManagedBean.operations}"
+		var="op">
+			<h:column>
+				<f:facet name="header">Date </f:facet>
+				#{op.dateOperation}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Débit</f:facet>
+				<h:outputLabel value="#{utilisateurManagedBean.test(op, 'debit')}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Crédit</f:facet>
+				<h:outputLabel value="#{utilisateurManagedBean.test(op, 'credit')}" />
+			</h:column>
+		</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<div id="bandeau">
+		<div class="logo">Logo</div>
+		<div class="titre">Ma Banque</div>
+		<div class="formulaire-connection">
+			<h:form>
+				<h:panelGroup layout="block" rendered="#{mbConnexion.utilisateur == null}">
+					<span>Mail</span><h:inputText value="#{mbConnexion.mail}" />
+					<br />
+					<span>Mot de passe</span><h:inputText value="#{mbConnexion.mdp}" />
+					<br />
+					<h:commandButton value="Se Connecter" action="#{mbConnexion.connecter}" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{mbConnexion.utilisateur!= null}">
+					<h:commandLink value="se deconnecter" action="#{mbConnexion.seDeconnecter()}" />
+				</h:panelGroup>
+			</h:form>
+		</div>
+	</div>
+	<div id="page">
+		<ui:insert name="content"/>
+	</div>
+</body> 
+</html>
